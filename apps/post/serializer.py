@@ -16,7 +16,6 @@ class PostSerializer(serializers.ModelSerializer):
             "category",
             "tags",
             "video",
-            "views_count",
             "is_popular"
         )
 
@@ -27,6 +26,7 @@ class PostDetailSerializer(serializers.ModelSerializer):
         fields = (
             "id",
             "title",
+            "slug",
             "description",
             "photo",
             "content",
@@ -34,8 +34,10 @@ class PostDetailSerializer(serializers.ModelSerializer):
             "category",
             "tags",
             "video",
-            "views_count",
             "is_popular"
         )
+
+    def save(self, **kwargs):
+        pass
 
 

@@ -60,7 +60,6 @@ class Post(BaseModel):
                               verbose_name=_("Video"),
                               null=True,
                               blank=True)
-    views_count = models.PositiveIntegerField(default=0)
     is_popular = models.BooleanField(null=True, blank=True)
 
     def save(self, *args, **kwargs):
@@ -74,6 +73,20 @@ class Post(BaseModel):
     class Meta:
         verbose_name = "Post"
         verbose_name_plural = "Posts"
+
+
+class ViewPost(BaseModel):
+    post = models.ForeignKey("post.Post",
+                             on_delete=models.CASCADE,
+                             related_name="viewpost",
+                             verbose_name=_("Post"))
+    device = models.CharField(max_length=255)
+
+    def __str__(self):
+        return self.post
+
+    class Meta:
+        unique_together = ("post", "device")
 
 
 class Comment(BaseModel):

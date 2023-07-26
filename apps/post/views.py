@@ -16,6 +16,8 @@ class PostApiView(APIView):
 class PostDetailView(APIView):
     def get(self, request, slug):
         post = Post.objects.get(slug=slug)
+        device_id = self.request.headers
+        print(device_id)
         serializer = PostDetailSerializer(post)
         return Response(serializer.data, status=200)
 
